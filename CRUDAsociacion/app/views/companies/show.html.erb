@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row justify-content-md-center">
+ <h1> <%= @company.name %> </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-4"> 
+    <%= form_with(model:[@company,@employee], local:true) do |form| %>
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+    <%= form.label :area %>
+    <%= form.select :area, Area.pluck(:name, :id) %>
+    <%= form.submit %>
+    <% end %>
+  </div>
+
+  <div class="col-md-8">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Area</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% @company.employees.each do |employee| %>
+          <tr>
+            <td><%= employee.first_name %></td>
+            <td><%= employee.last_name %></td>
+            <td><%= employee.email %></td>
+            <td><%= Area.find(employee.area_id).name %></td>
+            <td><%= link_to 'Destroy', company_employee_path({:company_id => @company.id, :id => employee.id}), { "class" => "btn btn-danger", "method" => "delete" } %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<%= link_to 'Edit', edit_company_path(@company) %>
+<%= link_to 'Back', companies_path %>
