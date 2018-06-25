@@ -16,3 +16,13 @@
 body {
     padding-top: 20px;
 }
+
+a:hover{
+  color:#cccccc;
+  background-color: transparent;
+}
+
+a:visited{
+  color:#111111;
+
+}

@@ -14,7 +14,7 @@
     <%= form.label :email %>
     <%= form.text_field :email %>
     <%= form.label :area %>
-    <%= form.select :area, Area.pluck(:name, :id) %>
+    <%= form.select :area, @area %>
     <%= form.submit %>
     <% end %>
   </div>
@@ -38,7 +38,8 @@
             <td><%= employee.last_name %></td>
             <td><%= employee.email %></td>
             <td><%= Area.find(employee.area_id).name %></td>
-            <td><%= link_to 'Destroy', company_employee_path({:company_id => @company.id, :id => employee.id}), { "class" => "btn btn-danger", "method" => "delete" } %> </td>
+            <%# <td><%= link_to 'Destroy', company_employee_path({:company_id => @company.id, :id => employee.id}), { "class" => "btn btn-danger", "method" => "delete" } </td> %>
+            <td><%= link_to 'Destroy', company_employee_path(employee.company,employee), { "class" => "btn btn-danger", "method" => "delete" } %></td> 
           </tr>
         <% end %>
       </tbody>

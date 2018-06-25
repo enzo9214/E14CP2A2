@@ -12,6 +12,7 @@ class CompaniesController < ApplicationController
   def show
     @employee = Employee.new
     @company = Company.find(params[:id])
+    @area = Area.pluck(:name,:id)
   end
 
   # GET /companies/new
